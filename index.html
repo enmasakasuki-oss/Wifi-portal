@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            /* Palitan ang URL sa ibaba para sa sarili mong background image */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 380px;
+            width: 90%;
+            backdrop-filter: blur(5px);
+        }
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #1e3c72;
+        }
+        h2 {
+            margin-bottom: 8px;
+            color: #1e3c72;
+            font-size: 22px;
+        }
+        .announcement {
+            background-color: #eef2f7;
+            border-left: 4px solid #1e3c72;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #444;
+            text-align: left;
+        }
+        .timer-box {
+            font-size: 40px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 10px 0;
+        }
+        .btn {
+            background-color: #bdc3c7;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .btn.active {
+            background-color: #27ae60;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+        .btn.active:hover {
+            background-color: #219150;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Palitan ang src ng URL ng sarili mong logo -->
+        <img src="https://via.placeholder.com/80" alt="Logo" class="logo">
+        
+        <h2>Maligayang Pagdating!</h2>
+        <p style="font-size: 13px; color: #666;">Maghintay nang sandali habang inihahanda ang koneksyon.</p>
+        
+        <!-- Announcement Box -->
+        <div class="announcement">
+            <strong>📢 Anunsyo:</strong><br>
+            Paki-respeto ang paggamit ng bandwidth. Bawal ang mag-download ng malalaking files.
+        </div>
+        
+        <div class="timer-box" id="timer">10</div>
+        
+        <button id="actionBtn" class="btn" disabled>Mangyaring Maghintay...</button>
+    </div>
+
+    <script>
+        let timeLeft = 10; 
+        const timerElement = document.getElementById('timer');
+        const actionBtn = document.getElementById('actionBtn');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerElement.textContent = "✓ READY";
+                timerElement.style.color = "#27ae60";
+                
+                actionBtn.textContent = "Magpatuloy sa Internet";
+                actionBtn.classList.add('active');
+                actionBtn.removeAttribute('disabled');
+            }
+        }, 1000);
+
+        actionBtn.addEventListener('click', () => {
+            if (!actionBtn.hasAttribute('disabled')) {
+                // Ilagay dito ang target URL kapag pinindot ang button
+                window.location.href = "https://www.google.com"; 
+            }
+        });
+    </script>
+
+</body>
+</html>
